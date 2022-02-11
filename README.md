@@ -6,7 +6,7 @@ Nuget包地址：https://www.nuget.org/packages/Lebai.SDK
 
 Api 文档：https://www.fuget.org/packages/Lebai.SDK/latest/lib/net5.0/Lebai.SDK.dll/Lebai.SDK/LebaiRobotClient
 
-乐白机器人开发手册：https://www.lebai.ltd/product/document/1/2
+乐白机器人开发手册：https://docs.lebai.ltd/lmaster/api-doc/
 
 平台：.NET 5.0、.Net 6.0
 
