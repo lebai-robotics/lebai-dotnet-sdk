@@ -1,12 +1,16 @@
 ﻿namespace Lebai.SDK.Dtos
 {
-	public class TaskExecuteResult
-	{
-		public int Id { get; set; }
+   public class TaskExecuteResult
+   {
+      public int Id { get; set; }
 
-		public void Deconstruct(out int id)
-		{
-			id = Id;
-		}
-	}
+      public TaskExecuteResult()
+      {
+      }
+
+      public void Deconstruct(out int id)
+      {
+         id = Id;
+      }
+   }
 }

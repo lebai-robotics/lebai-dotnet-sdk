@@ -17,7 +17,7 @@ using Lebai.SDK;
 using Lebai.SDK.Dtos;
 using Robotc;
 
-var client = new LebaiRobotClient("192.168.3.227" /* 乐白机械臂 IP 地址 */);
+var client = new LebaiRobotClient("192.168.4.75" /* 乐白机械臂 IP 地址 */);
 
 // 启动
 await client.StartSys();
@@ -35,16 +35,16 @@ await client.GetDIO(new IOPin
 });
 
 // 运行场景直到做完
-var taskResult2 = await client.RunSceneUntilDone(10001 /*场景Id*/);
+var taskResult2 = await client.RunSceneUntilDone(10002 /*场景Id*/);
 
 // 运行场景，返回的对象包含 任务Id
-var (taskId) = await client.RunScene(10001);
+var runResult = await client.RunScene(10002);
 
 // 等待指定任务做完
-await client.WaitTaskRunCompleted(taskId);
+await client.WaitTaskRunCompleted(runResult.Id);
 
 // 查询任务信息
-var taskInfo = await client.GetTask(taskId);
+var taskInfo = await client.GetTask(runResult.Id);
 
 // 获取任务信息列表
 var taskInfos = await client.GetTasks(new GetTasksInput
