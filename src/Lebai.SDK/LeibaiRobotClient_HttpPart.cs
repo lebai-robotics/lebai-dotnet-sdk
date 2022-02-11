@@ -17,6 +17,12 @@ namespace Lebai.SDK
 {
    public class EnumExtension
    {
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="tField"></param>
+      /// <typeparam name="T"></typeparam>
+      /// <returns></returns>
       public static string GetEnumDescription<T>(T tField)
       {
          var description = string.Empty; //结果
@@ -119,6 +125,11 @@ namespace Lebai.SDK
          return first == null || first.Status != TaskStatus.Running && first.Status != TaskStatus.Pause;
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="cancellationToken"></param>
+      /// <exception cref="Exception"></exception>
       protected virtual async ValueTask CheckRobotStatus(CancellationToken cancellationToken = default)
       {
          if (!await GetIsCanRunTask(cancellationToken)) throw new Exception("机器人正在执行其他任务!");
@@ -130,11 +141,12 @@ namespace Lebai.SDK
       /// <param name="id">任务Id</param>
       /// <param name="executeCount">执行次数</param>
       /// <param name="clear">是否强制停止正在运行的任务</param>
+      /// <param name="cancellationToken"></param>
       /// <returns></returns>
       public virtual async Task<TaskExecuteResult> RunTask(int id, int executeCount = 1,
          bool clear = true, CancellationToken cancellationToken = default)
       {
-         await CheckRobotStatus();
+         await CheckRobotStatus(cancellationToken);
          var response = _httpClient.PostAsJsonAsync("/public/task", new
          {
             execute_count = executeCount,
@@ -172,6 +184,13 @@ namespace Lebai.SDK
          return r?.Data;
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="result"></param>
+      /// <param name="message"></param>
+      /// <typeparam name="T"></typeparam>
+      /// <exception cref="HttpRequestException"></exception>
       protected void HandleResult<T>(LebaiHttpResult<T> result, string message = "")
       {
          if (result.Code != 0)
@@ -197,7 +216,7 @@ namespace Lebai.SDK
          {
             if (cancellationToken.IsCancellationRequested) throw new OperationCanceledException();
 
-            if (taskInfo.Status == TaskStatus.Running || taskInfo.Status == TaskStatus.Idea)
+            if (taskInfo.Status is TaskStatus.Running or TaskStatus.Idea)
             {
                await Task.Delay(100, cancellationToken);
                taskInfo = await GetTask(id, cancellationToken);
@@ -235,6 +254,7 @@ namespace Lebai.SDK
       ///    执行Lua 代码
       /// </summary>
       /// <param name="luaCode"></param>
+      /// <param name="cancellationToken"></param>
       /// <returns></returns>
       public virtual async Task<TaskExecuteResult> ExecuteLua(string luaCode,
          CancellationToken cancellationToken = default)
