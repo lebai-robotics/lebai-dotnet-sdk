@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Lebai.SDK.Dtos;
 using Lebai.SDK.Exceptions;
-using RobotMode = Robotc.RobotMode;
 using TaskStatus = Lebai.SDK.Dtos.TaskStatus;
 #if NET5_0||NET6_0
 using System.Net.Http.Json;
@@ -43,7 +40,7 @@ namespace Lebai.SDK
 
    public partial class LebaiRobotClient
    {
-      public static Dictionary<int, string> CodeMessage = new Dictionary<int, string>()
+      public static Dictionary<int, string> CodeMessage = new()
       {
          [2001] = "系统异常",
          [2002] = "登录授权码错误",
@@ -78,96 +75,80 @@ namespace Lebai.SDK
       };
 
       /// <summary>
-      /// 获取指定任务信息
+      ///    获取指定任务信息
       /// </summary>
       /// <param name="id"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
       public virtual async ValueTask<TaskInfo> GetTask(int id, CancellationToken cancellationToken = default)
       {
-         var response = _httpClient.GetAsync($"/public/task?id={id}", cancellationToken).Result;
-#if NETSTANDARD2_0 || NETSTANDARD2_1
-			var r = Deserialize<LebaiHttpResult<TaskInfo>>(await response.Content.ReadAsStreamAsync());
-			HandleResult(r);
-			return r?.Data;
-#elif NET5_0||NET6_0
-         var r = (await response.Content.ReadFromJsonAsync<LebaiHttpResult<OriginTaskInfo>>(
-            cancellationToken: cancellationToken));
+         var response = await _httpClient.GetAsync($"/public/task?id={id}", cancellationToken);
+
+         var r = await response.Content.ReadFromJsonAsync<LebaiHttpResult<OriginTaskInfo>>(
+            cancellationToken: cancellationToken);
          HandleResult(r, $"场景Id：{id}");
          return r?.Data.ToTaskInfo();
-#endif
       }
 
       /// <summary>
-      /// 获取任务信息
+      ///    获取任务信息
       /// </summary>
       /// <param name="input"></param>
+      /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual async ValueTask<TasksResult> GetTasks(GetTasksInput input)
+      public virtual async ValueTask<TasksResult> GetTasks(GetTasksInput input,
+         CancellationToken cancellationToken = default)
       {
-         var response = _httpClient.GetAsync($"/public/tasks?pi={input.PageIndex}&ps={input.PageSize}").Result;
-#if NETSTANDARD2_0 || NETSTANDARD2_1
-			var r = Deserialize<LebaiHttpResult<OriginTasksResult>>(await response.Content.ReadAsStreamAsync());
-#elif NET5_0||NET6_0
-         var r = await response.Content.ReadFromJsonAsync<LebaiHttpResult<OriginTasksResult>>();
-#endif
+         var response = _httpClient
+            .GetAsync($"/public/tasks?pi={input.PageIndex}&ps={input.PageSize}", cancellationToken).Result;
+         var r = await response.Content.ReadFromJsonAsync<LebaiHttpResult<OriginTasksResult>>(
+            cancellationToken: cancellationToken);
+
          HandleResult(r);
          return r?.Data?.ToResult();
       }
 
       /// <summary>
-      /// 检测是否能运行任务（机器人是否正在运行其他任务）
+      ///    检测是否能运行任务（机器人是否正在运行其他任务）
       /// </summary>
       /// <returns></returns>
-      public virtual async ValueTask<bool> GetIsCanRunTask()
+      public virtual async ValueTask<bool> GetIsCanRunTask(CancellationToken cancellationToken = default)
       {
-         var result = await GetTasks(new GetTasksInput {PageIndex = 1, PageSize = 1});
+         var result = await GetTasks(new GetTasksInput {PageIndex = 1, PageSize = 1}, cancellationToken);
          var first = result.Items.FirstOrDefault();
          return first == null || first.Status != TaskStatus.Running && first.Status != TaskStatus.Pause;
       }
 
-      protected virtual async ValueTask CheckRobotStatus()
+      protected virtual async ValueTask CheckRobotStatus(CancellationToken cancellationToken = default)
       {
-         if (!await GetIsCanRunTask())
-         {
-            throw new Exception("机器人正在执行其他任务!");
-         }
+         if (!await GetIsCanRunTask(cancellationToken)) throw new Exception("机器人正在执行其他任务!");
       }
 
       /// <summary>
-      /// 运行任务
+      ///    运行任务
       /// </summary>
       /// <param name="id">任务Id</param>
       /// <param name="executeCount">执行次数</param>
       /// <param name="clear">是否强制停止正在运行的任务</param>
       /// <returns></returns>
       public virtual async Task<TaskExecuteResult> RunTask(int id, int executeCount = 1,
-         bool clear = true)
+         bool clear = true, CancellationToken cancellationToken = default)
       {
          await CheckRobotStatus();
-#if NETSTANDARD2_0 || NETSTANDARD2_1
-			var response = _httpClient.PostAsync("/public/task", new StringContent(Serialize(new
-			{
-				execute_count = executeCount,
-				clear = clear ? 1 : 0,
-				task_id = id
-			}))).Result;
-			var r = Deserialize<LebaiHttpResult<TaskExecuteResult>>(await response.Content.ReadAsStreamAsync());
-#elif NET5_0||NET6_0
          var response = _httpClient.PostAsJsonAsync("/public/task", new
          {
             execute_count = executeCount,
             clear = clear ? 1 : 0,
             task_id = id
-         }).Result;
-         var r = await response.Content.ReadFromJsonAsync<LebaiHttpResult<TaskExecuteResult>>();
-#endif
+         }, cancellationToken).Result;
+         var r = await response.Content.ReadFromJsonAsync<LebaiHttpResult<TaskExecuteResult>>(
+            cancellationToken: cancellationToken);
          HandleResult(r);
          return r?.Data;
       }
 
       /// <summary>
-      /// 运行场景
+      ///    运行场景
       /// </summary>
       /// <param name="id">场景Id</param>
       /// <param name="executeCount">运行次数</param>
@@ -177,25 +158,16 @@ namespace Lebai.SDK
       public virtual async Task<TaskExecuteResult> RunScene(int id, int executeCount = 1,
          bool clear = false, CancellationToken cancellationToken = default)
       {
-         await CheckRobotStatus();
-#if NETSTANDARD2_0 || NETSTANDARD2_1
-			var response = _httpClient.PostAsync("/public/task", new StringContent(Serialize(new
-			{
-				execute_count = executeCount,
-				clear = clear ? 1 : 0,
-				scene_id = id
-			}))).Result;
-			var r = Deserialize<LebaiHttpResult<TaskExecuteResult>>(await response.Content.ReadAsStreamAsync());
-#elif NET5_0||NET6_0
+         await CheckRobotStatus(cancellationToken);
+
          var response = _httpClient.PostAsJsonAsync("/public/task", new
          {
             execute_count = executeCount,
             clear = clear ? 1 : 0,
             scene_id = id
-         }, cancellationToken: cancellationToken).Result;
+         }, cancellationToken).Result;
          var r = await response.Content.ReadFromJsonAsync<LebaiHttpResult<TaskExecuteResult>>(
             cancellationToken: cancellationToken);
-#endif
          HandleResult(r, $"场景Id：{id}");
          return r?.Data;
       }
@@ -203,16 +175,14 @@ namespace Lebai.SDK
       protected void HandleResult<T>(LebaiHttpResult<T> result, string message = "")
       {
          if (result.Code != 0)
-         {
             throw new HttpRequestException($"调用失败，{message}，Code：{result.Code}" +
                                            (CodeMessage.ContainsKey(result.Code)
                                               ? $"，{CodeMessage[result.Code]}"
                                               : ""));
-         }
       }
 
       /// <summary>
-      /// 等待任务运行完成
+      ///    等待任务运行完成
       /// </summary>
       /// <param name="id">任务Id</param>
       /// <param name="cancellationToken"></param>
@@ -225,10 +195,7 @@ namespace Lebai.SDK
          var taskInfo = await GetTask(id, cancellationToken);
          while (true)
          {
-            if (cancellationToken.IsCancellationRequested)
-            {
-               throw new OperationCanceledException();
-            }
+            if (cancellationToken.IsCancellationRequested) throw new OperationCanceledException();
 
             if (taskInfo.Status == TaskStatus.Running || taskInfo.Status == TaskStatus.Idea)
             {
@@ -249,7 +216,7 @@ namespace Lebai.SDK
       }
 
       /// <summary>
-      /// 运行场景直到运行完成
+      ///    运行场景直到运行完成
       /// </summary>
       /// <param name="id">场景Id</param>
       /// <param name="executeCount">执行次数</param>
@@ -265,38 +232,20 @@ namespace Lebai.SDK
       }
 
       /// <summary>
-      /// 执行Lua 代码
+      ///    执行Lua 代码
       /// </summary>
       /// <param name="luaCode"></param>
       /// <returns></returns>
-      public virtual async Task<TaskExecuteResult> ExecuteLua(string luaCode)
+      public virtual async Task<TaskExecuteResult> ExecuteLua(string luaCode,
+         CancellationToken cancellationToken = default)
       {
-         var response = await _httpClient.PostAsync("/public/executor/lua", new StringContent(luaCode));
-#if NETSTANDARD2_0 || NETSTANDARD2_1
-			var r = Deserialize<LebaiHttpResult<TaskExecuteResult>>(await response.Content.ReadAsStreamAsync());
-#elif NET5_0||NET6_0
-         var r = await response.Content.ReadFromJsonAsync<LebaiHttpResult<TaskExecuteResult>>();
-#endif
+         var response =
+            await _httpClient.PostAsync("/public/executor/lua", new StringContent(luaCode), cancellationToken);
+         var r = await response.Content.ReadFromJsonAsync<LebaiHttpResult<TaskExecuteResult>>(
+            cancellationToken: cancellationToken);
+
          HandleResult(r);
          return r?.Data;
       }
-
-#if NETSTANDARD2_0 || NETSTANDARD2_1
-		protected string Serialize<T>(T obj)
-		{
-			DataContractJsonSerializer dataContractJsonSerializer =
-				new DataContractJsonSerializer(typeof(LebaiHttpResult<TaskExecuteResult>));
-			var stream = new MemoryStream();
-			dataContractJsonSerializer.WriteObject(stream, obj);
-			return new StreamReader(stream).ReadToEnd();
-		}
-
-		protected T Deserialize<T>(Stream stream) where T : class
-		{
-			DataContractJsonSerializer dataContractJsonSerializer =
-				new DataContractJsonSerializer(typeof(LebaiHttpResult<TaskExecuteResult>));
-			return dataContractJsonSerializer.ReadObject(stream) as T;
-		}
-#endif
    }
 }
