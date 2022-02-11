@@ -74,7 +74,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="externalIoState"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask ConnectExternalIO(ExternalIOState externalIoState,
+      public virtual async Task ConnectExternalIO(ExternalIOState externalIoState,
          CancellationToken cancellationToken = default)
       {
          await RobotPrivateControllerClient.ConnectExternalIOAsync(externalIoState,
@@ -84,7 +84,7 @@ namespace Lebai.SDK
       /// <summary>
       ///    关闭电源
       /// </summary>
-      public virtual async ValueTask PowerDown(CancellationToken cancellationToken = default)
+      public virtual async Task PowerDown(CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.PowerDownAsync(new Empty(), cancellationToken: cancellationToken);
       }
@@ -94,7 +94,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="sleepRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask Sleep(SleepRequest sleepRequest, CancellationToken cancellationToken = default)
+      public virtual async Task Sleep(SleepRequest sleepRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SleepAsync(sleepRequest, cancellationToken: cancellationToken);
       }
@@ -102,7 +102,7 @@ namespace Lebai.SDK
       /// <summary>
       ///    同步，等待命令执行完成
       /// </summary>
-      public virtual async ValueTask Sync(CancellationToken cancellationToken = default)
+      public virtual async Task Sync(CancellationToken cancellationToken = default)
       {
          try
          {
@@ -114,7 +114,7 @@ namespace Lebai.SDK
          }
       }
 
-      public virtual async ValueTask SyncFor(SyncRequest syncRequest, CancellationToken cancellationToken = default)
+      public virtual async Task SyncFor(SyncRequest syncRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SyncForAsync(syncRequest, cancellationToken: cancellationToken);
       }
@@ -122,7 +122,7 @@ namespace Lebai.SDK
       /// <summary>
       ///    开启示教模式
       /// </summary>
-      public virtual async ValueTask TeachMode(CancellationToken cancellationToken = default)
+      public virtual async Task TeachMode(CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.TeachModeAsync(new Empty(), cancellationToken: cancellationToken);
       }
@@ -130,7 +130,7 @@ namespace Lebai.SDK
       /// <summary>
       ///    关闭示教模式
       /// </summary>
-      public virtual async ValueTask EndTeachMode(CancellationToken cancellationToken = default)
+      public virtual async Task EndTeachMode(CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.EndTeachModeAsync(new Empty(), cancellationToken: cancellationToken);
       }
@@ -140,7 +140,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="factor"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetVelocityFactor(Factor factor, CancellationToken cancellationToken = default)
+      public virtual async Task SetVelocityFactor(Factor factor, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetVelocityFactorAsync(factor, cancellationToken: cancellationToken);
       }
@@ -149,9 +149,9 @@ namespace Lebai.SDK
       ///    获取速度因子（0-100）
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Factor> GetVelocityFactor(CancellationToken cancellationToken = default)
+      public virtual async Task<Factor> GetVelocityFactor(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetVelocityFactorAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetVelocityFactorAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -159,7 +159,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="coordinate"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetGravity(Coordinate coordinate, CancellationToken cancellationToken = default)
+      public virtual async Task SetGravity(Coordinate coordinate, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetGravityAsync(coordinate, cancellationToken: cancellationToken);
       }
@@ -168,9 +168,9 @@ namespace Lebai.SDK
       ///    获取重力方向
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Coordinate> GetGravity(CancellationToken cancellationToken = default)
+      public virtual async Task<Coordinate> GetGravity(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetGravityAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetGravityAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -178,7 +178,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="payload"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetPayload(Payload payload, CancellationToken cancellationToken = default)
+      public virtual async Task SetPayload(Payload payload, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetPayloadAsync(payload, cancellationToken: cancellationToken);
       }
@@ -187,9 +187,9 @@ namespace Lebai.SDK
       ///    获取负载
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Payload> GetPayload(CancellationToken cancellationToken = default)
+      public virtual async Task<Payload> GetPayload(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetPayloadAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetPayloadAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -197,7 +197,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="payloadMass"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetPayloadMass(PayloadMass payloadMass,
+      public virtual async Task SetPayloadMass(PayloadMass payloadMass,
          CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetPayloadMassAsync(payloadMass, cancellationToken: cancellationToken);
@@ -207,9 +207,9 @@ namespace Lebai.SDK
       ///    获取负责质量
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<PayloadMass> GetPayloadMass(CancellationToken cancellationToken = default)
+      public virtual async Task<PayloadMass> GetPayloadMass(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetPayloadMassAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetPayloadMassAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -217,7 +217,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="payloadCog"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetPayloadCog(PayloadCog payloadCog, CancellationToken cancellationToken = default)
+      public virtual async Task SetPayloadCog(PayloadCog payloadCog, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetPayloadCogAsync(payloadCog, cancellationToken: cancellationToken);
       }
@@ -226,9 +226,9 @@ namespace Lebai.SDK
       ///    获取负责质心
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<PayloadCog> GetPayloadCog(CancellationToken cancellationToken = default)
+      public virtual async Task<PayloadCog> GetPayloadCog(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetPayloadCogAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetPayloadCogAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -236,7 +236,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="pR"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetTcp(PR pR, CancellationToken cancellationToken = default)
+      public virtual async Task SetTcp(PR pR, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetTcpAsync(pR, cancellationToken: cancellationToken);
       }
@@ -245,9 +245,9 @@ namespace Lebai.SDK
       ///    获取TCP
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<PR> GetTcp(CancellationToken cancellationToken = default)
+      public virtual async Task<PR> GetTcp(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetTcpAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetTcpAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -255,7 +255,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="amplitude"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetClawAmplitude(Amplitude amplitude,
+      public virtual async Task SetClawAmplitude(Amplitude amplitude,
          CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetClawAmplitudeAsync(amplitude, cancellationToken: cancellationToken);
@@ -265,18 +265,18 @@ namespace Lebai.SDK
       ///    获得手爪幅度：0-100 double
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Amplitude> GetClawAmplitude(CancellationToken cancellationToken = default)
+      public virtual async Task<Amplitude> GetClawAmplitude(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetClawAmplitudeAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetClawAmplitudeAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获得手爪目前是否夹紧物体状态1表示夹紧，0为松开
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<HoldOn> GetClawHoldOn(CancellationToken cancellationToken = default)
+      public virtual async Task<HoldOn> GetClawHoldOn(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetClawHoldOnAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetClawHoldOnAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -284,7 +284,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="force"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetClawForce(Force force, CancellationToken cancellationToken = default)
+      public virtual async Task SetClawForce(Force force, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetClawForceAsync(force, cancellationToken: cancellationToken);
       }
@@ -293,18 +293,18 @@ namespace Lebai.SDK
       ///    获得手爪称重结果
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Weight> GetClawWeight(CancellationToken cancellationToken = default)
+      public virtual async Task<Weight> GetClawWeight(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetClawWeightAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetClawWeightAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    implement later
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ForceTorque> GetTcpForce(CancellationToken cancellationToken = default)
+      public virtual async Task<ForceTorque> GetTcpForce(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetTcpForceAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetTcpForceAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -313,18 +313,18 @@ namespace Lebai.SDK
       /// <param name="clawInfo"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ClawInfo> SetClaw(ClawInfo clawInfo, CancellationToken cancellationToken = default)
+      public virtual async Task<ClawInfo> SetClaw(ClawInfo clawInfo, CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.SetClawAsync(clawInfo, cancellationToken: cancellationToken);
+         return await RobotControllerClient.SetClawAsync(clawInfo, cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获取手爪
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ClawInfo> GetClaw(CancellationToken cancellationToken = default)
+      public virtual async Task<ClawInfo> GetClaw(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetClawAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetClawAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -332,7 +332,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="jPose"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetPos(JPose jPose, CancellationToken cancellationToken = default)
+      public virtual async Task SetPos(JPose jPose, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetPosAsync(jPose, cancellationToken: cancellationToken);
       }
@@ -342,7 +342,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="speedJRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SpeedJ(SpeedJRequest speedJRequest, CancellationToken cancellationToken = default)
+      public virtual async Task SpeedJ(SpeedJRequest speedJRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SpeedJAsync(speedJRequest, cancellationToken: cancellationToken);
       }
@@ -352,7 +352,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="speedLRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SpeedL(SpeedLRequest speedLRequest, CancellationToken cancellationToken = default)
+      public virtual async Task SpeedL(SpeedLRequest speedLRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SpeedLAsync(speedLRequest, cancellationToken: cancellationToken);
       }
@@ -362,7 +362,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="stopJRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask StopJ(StopJRequest stopJRequest, CancellationToken cancellationToken = default)
+      public virtual async Task StopJ(StopJRequest stopJRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.StopJAsync(stopJRequest, cancellationToken: cancellationToken);
       }
@@ -372,7 +372,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="stopLRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask StopL(StopLRequest stopLRequest, CancellationToken cancellationToken = default)
+      public virtual async Task StopL(StopLRequest stopLRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.StopLAsync(stopLRequest, cancellationToken: cancellationToken);
       }
@@ -380,7 +380,7 @@ namespace Lebai.SDK
       /// <summary>
       ///    停止当前移动
       /// </summary>
-      public virtual async ValueTask StopMove(CancellationToken cancellationToken = default)
+      public virtual async Task StopMove(CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.StopMoveAsync(new Empty(), cancellationToken: cancellationToken);
       }
@@ -390,7 +390,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="moveCRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask MoveC(MoveCRequest moveCRequest, CancellationToken cancellationToken = default)
+      public virtual async Task MoveC(MoveCRequest moveCRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.MoveCAsync(moveCRequest, cancellationToken: cancellationToken);
       }
@@ -400,7 +400,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="moveJRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask MoveJ(MoveJRequest moveJRequest, CancellationToken cancellationToken = default)
+      public virtual async Task MoveJ(MoveJRequest moveJRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.MoveJAsync(moveJRequest, cancellationToken: cancellationToken);
       }
@@ -410,7 +410,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="moveLRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask MoveL(MoveLRequest moveLRequest, CancellationToken cancellationToken = default)
+      public virtual async Task MoveL(MoveLRequest moveLRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.MoveLAsync(moveLRequest, cancellationToken: cancellationToken);
       }
@@ -421,7 +421,7 @@ namespace Lebai.SDK
       /// <param name="moveLRequest"></param>
       /// <param name="cancellationToken"></param>
       [Obsolete]
-      public virtual async ValueTask MoveLJ(MoveLRequest moveLRequest, CancellationToken cancellationToken = default)
+      public virtual async Task MoveLJ(MoveLRequest moveLRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.MoveLJAsync(moveLRequest, cancellationToken: cancellationToken);
       }
@@ -431,7 +431,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="movePRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask MoveP(MovePRequest movePRequest, CancellationToken cancellationToken = default)
+      public virtual async Task MoveP(MovePRequest movePRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.MovePAsync(movePRequest, cancellationToken: cancellationToken);
       }
@@ -441,7 +441,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="pVATRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask MovePT(PVATRequest pVATRequest, CancellationToken cancellationToken = default)
+      public virtual async Task MovePT(PVATRequest pVATRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.MovePTAsync(pVATRequest, cancellationToken: cancellationToken);
       }
@@ -456,7 +456,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="pVATRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask MovePVT(PVATRequest pVATRequest, CancellationToken cancellationToken = default)
+      public virtual async Task MovePVT(PVATRequest pVATRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.MovePVTAsync(pVATRequest, cancellationToken: cancellationToken);
       }
@@ -471,7 +471,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="pVATRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask MovePVAT(PVATRequest pVATRequest, CancellationToken cancellationToken = default)
+      public virtual async Task MovePVAT(PVATRequest pVATRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.MovePVATAsync(pVATRequest, cancellationToken: cancellationToken);
       }
@@ -486,7 +486,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="servoCRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask ServoC(ServoCRequest servoCRequest, CancellationToken cancellationToken = default)
+      public virtual async Task ServoC(ServoCRequest servoCRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.ServoCAsync(servoCRequest, cancellationToken: cancellationToken);
       }
@@ -496,7 +496,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="servoJRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask ServoJ(ServoJRequest servoJRequest, CancellationToken cancellationToken = default)
+      public virtual async Task ServoJ(ServoJRequest servoJRequest, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.ServoJAsync(servoJRequest, cancellationToken: cancellationToken);
       }
@@ -505,117 +505,121 @@ namespace Lebai.SDK
       ///    获取机器人所有状态数据
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<RobotData> GetRobotData(CancellationToken cancellationToken = default)
+      public virtual async Task<RobotData> GetRobotData(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetRobotDataAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetRobotDataAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获取机器人状态
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<RobotMode> GetRobotMode(CancellationToken cancellationToken = default)
+      public virtual async Task<RobotMode> GetRobotMode(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetRobotModeAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetRobotModeAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获得实际关节位置
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Joint> GetActualJointPositions(CancellationToken cancellationToken = default)
+      public virtual async Task<Joint> GetActualJointPositions(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetActualJointPositionsAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetActualJointPositionsAsync(new Empty(),
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获得目标关节位置
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Joint> GetTargetJointPositions(CancellationToken cancellationToken = default)
+      public virtual async Task<Joint> GetTargetJointPositions(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetTargetJointPositionsAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetTargetJointPositionsAsync(new Empty(),
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获得实际关节速度
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Joint> GetActualJointSpeeds(CancellationToken cancellationToken = default)
+      public virtual async Task<Joint> GetActualJointSpeeds(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetActualJointSpeedsAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetActualJointSpeedsAsync(new Empty(),
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获得目标关节速度
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Joint> GetTargetJointSpeeds(CancellationToken cancellationToken = default)
+      public virtual async Task<Joint> GetTargetJointSpeeds(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetTargetJointSpeedsAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetTargetJointSpeedsAsync(new Empty(),
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获得末端在笛卡尔坐标系下的位姿
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Vector> GetActualTcpPose(CancellationToken cancellationToken = default)
+      public virtual async Task<Vector> GetActualTcpPose(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetActualTcpPoseAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetActualTcpPoseAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获得末端在笛卡尔坐标系下的目标位姿
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Vector> GetTargetTcpPose(CancellationToken cancellationToken = default)
+      public virtual async Task<Vector> GetTargetTcpPose(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetTargetTcpPoseAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetTargetTcpPoseAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    implement later
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Vector> GetActualTcpSpeed(CancellationToken cancellationToken = default)
+      public virtual async Task<Vector> GetActualTcpSpeed(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetActualTcpSpeedAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetActualTcpSpeedAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    implement later
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Vector> GetTargetTcpSpeed(CancellationToken cancellationToken = default)
+      public virtual async Task<Vector> GetTargetTcpSpeed(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetTargetTcpSpeedAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetTargetTcpSpeedAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    implement later
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Vector> GetActualFlangePose(CancellationToken cancellationToken = default)
+      public virtual async Task<Vector> GetActualFlangePose(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetActualFlangePoseAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetActualFlangePoseAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获取关节扭矩
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Joint> GetJointTorques(CancellationToken cancellationToken = default)
+      public virtual async Task<Joint> GetJointTorques(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetJointTorquesAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetJointTorquesAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获取控制器温度
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Temperature> GetControllerTemp(CancellationToken cancellationToken = default)
+      public virtual async Task<Temperature> GetControllerTemp(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetControllerTempAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetControllerTempAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -623,19 +627,19 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="intRequest"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Temperature> GetJointTemp(IntRequest intRequest,
+      public virtual async Task<Temperature> GetJointTemp(IntRequest intRequest,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetJointTempAsync(intRequest, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetJointTempAsync(intRequest, cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    implement later
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Current> GetToolCurrent(CancellationToken cancellationToken = default)
+      public virtual async Task<Current> GetToolCurrent(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetToolCurrentAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetToolCurrentAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -643,7 +647,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="dIO"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetDIO(DIO dIO, CancellationToken cancellationToken = default)
+      public virtual async Task SetDIO(DIO dIO, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetDIOAsync(dIO, cancellationToken: cancellationToken);
       }
@@ -653,7 +657,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="dIO"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetExtraDIO(DIO dIO, CancellationToken cancellationToken = default)
+      public virtual async Task SetExtraDIO(DIO dIO, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetExtraDIOAsync(dIO, cancellationToken: cancellationToken);
       }
@@ -664,9 +668,9 @@ namespace Lebai.SDK
       /// <param name="iOPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<DIO> GetDIO(IOPin iOPin, CancellationToken cancellationToken = default)
+      public virtual async Task<DIO> GetDIO(IOPin iOPin, CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetDIOAsync(iOPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetDIOAsync(iOPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -675,9 +679,9 @@ namespace Lebai.SDK
       /// <param name="iOPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<DIO> GetExtraDIO(IOPin iOPin, CancellationToken cancellationToken = default)
+      public virtual async Task<DIO> GetExtraDIO(IOPin iOPin, CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExtraDIOAsync(iOPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExtraDIOAsync(iOPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -685,7 +689,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="dIO"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetTcpDIO(DIO dIO, CancellationToken cancellationToken = default)
+      public virtual async Task SetTcpDIO(DIO dIO, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetTcpDIOAsync(dIO, cancellationToken: cancellationToken);
       }
@@ -696,9 +700,9 @@ namespace Lebai.SDK
       /// <param name="iOPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<DIO> GetTcpDIO(IOPin iOPin, CancellationToken cancellationToken = default)
+      public virtual async Task<DIO> GetTcpDIO(IOPin iOPin, CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetTcpDIOAsync(iOPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetTcpDIOAsync(iOPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -706,7 +710,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="aIO"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetAIO(AIO aIO, CancellationToken cancellationToken = default)
+      public virtual async Task SetAIO(AIO aIO, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetAIOAsync(aIO, cancellationToken: cancellationToken);
       }
@@ -716,7 +720,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="aIO"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetExtraAIO(AIO aIO, CancellationToken cancellationToken = default)
+      public virtual async Task SetExtraAIO(AIO aIO, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetExtraAIOAsync(aIO, cancellationToken: cancellationToken);
       }
@@ -727,9 +731,9 @@ namespace Lebai.SDK
       /// <param name="iOPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<AIO> GetAIO(IOPin iOPin, CancellationToken cancellationToken = default)
+      public virtual async Task<AIO> GetAIO(IOPin iOPin, CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetAIOAsync(iOPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetAIOAsync(iOPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -738,9 +742,9 @@ namespace Lebai.SDK
       /// <param name="iOPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<AIO> GetExtraAIO(IOPin iOPin, CancellationToken cancellationToken = default)
+      public virtual async Task<AIO> GetExtraAIO(IOPin iOPin, CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExtraAIOAsync(iOPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExtraAIOAsync(iOPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -748,7 +752,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="aIO"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetAInMode(AIO aIO, CancellationToken cancellationToken = default)
+      public virtual async Task SetAInMode(AIO aIO, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetAInModeAsync(aIO, cancellationToken: cancellationToken);
       }
@@ -758,7 +762,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="aIO"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetExtraAInMode(AIO aIO, CancellationToken cancellationToken = default)
+      public virtual async Task SetExtraAInMode(AIO aIO, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetExtraAInModeAsync(aIO, cancellationToken: cancellationToken);
       }
@@ -769,9 +773,9 @@ namespace Lebai.SDK
       /// <param name="iOPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<AIO> GetAInMode(IOPin iOPin, CancellationToken cancellationToken = default)
+      public virtual async Task<AIO> GetAInMode(IOPin iOPin, CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetAInModeAsync(iOPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetAInModeAsync(iOPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -780,9 +784,9 @@ namespace Lebai.SDK
       /// <param name="iOPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<AIO> GetExtraAInMode(IOPin iOPin, CancellationToken cancellationToken = default)
+      public virtual async Task<AIO> GetExtraAInMode(IOPin iOPin, CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExtraAInModeAsync(iOPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExtraAInModeAsync(iOPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -790,7 +794,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="aIO"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetAOutMode(AIO aIO, CancellationToken cancellationToken = default)
+      public virtual async Task SetAOutMode(AIO aIO, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetAOutModeAsync(aIO, cancellationToken: cancellationToken);
       }
@@ -800,7 +804,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="aIO"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetExtraAOutMode(AIO aIO, CancellationToken cancellationToken = default)
+      public virtual async Task SetExtraAOutMode(AIO aIO, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetExtraAOutModeAsync(aIO, cancellationToken: cancellationToken);
       }
@@ -811,9 +815,9 @@ namespace Lebai.SDK
       /// <param name="iOPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<AIO> GetAOutMode(IOPin iOPin, CancellationToken cancellationToken = default)
+      public virtual async Task<AIO> GetAOutMode(IOPin iOPin, CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetAOutModeAsync(iOPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetAOutModeAsync(iOPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -822,15 +826,15 @@ namespace Lebai.SDK
       /// <param name="iOPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<AIO> GetExtraAOutMode(IOPin iOPin, CancellationToken cancellationToken = default)
+      public virtual async Task<AIO> GetExtraAOutMode(IOPin iOPin, CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExtraAOutModeAsync(iOPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExtraAOutModeAsync(iOPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    开启/启动系统
       /// </summary>
-      public virtual async ValueTask StartSys(CancellationToken cancellationToken = default)
+      public virtual async Task StartSys(CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.StartSysAsync(new Empty(), cancellationToken: cancellationToken);
       }
@@ -838,7 +842,7 @@ namespace Lebai.SDK
       /// <summary>
       ///    关闭/停止系统
       /// </summary>
-      public virtual async ValueTask StopSys(CancellationToken cancellationToken = default)
+      public virtual async Task StopSys(CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.StopSysAsync(new Empty(), cancellationToken: cancellationToken);
       }
@@ -846,7 +850,7 @@ namespace Lebai.SDK
       /// <summary>
       ///    程序停止
       /// </summary>
-      public virtual async ValueTask Stop(CancellationToken cancellationToken = default)
+      public virtual async Task Stop(CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.StopAsync(new Empty(), cancellationToken: cancellationToken);
       }
@@ -854,7 +858,7 @@ namespace Lebai.SDK
       /// <summary>
       ///    急停
       /// </summary>
-      public virtual async ValueTask EStop(CancellationToken cancellationToken = default)
+      public virtual async Task EStop(CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.EStopAsync(new Empty(), cancellationToken: cancellationToken);
       }
@@ -863,24 +867,24 @@ namespace Lebai.SDK
       ///    获取kdl参数
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<KDParam> GetKDL(CancellationToken cancellationToken = default)
+      public virtual async Task<KDParam> GetKDL(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetKDLAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetKDLAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    查询系统里面的日志信息
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Logs> GetLogs(CancellationToken cancellationToken = default)
+      public virtual async Task<Logs> GetLogs(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetLogsAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetLogsAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获得当前正在执行的命令id，如果没有在执行的命令，则返回-1
       /// </summary>
-      public virtual async ValueTask GetCurrentCmd(CancellationToken cancellationToken = default)
+      public virtual async Task GetCurrentCmd(CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.GetCurrentCmdAsync(new Empty(), cancellationToken: cancellationToken);
       }
@@ -889,14 +893,14 @@ namespace Lebai.SDK
       // 获得指定命令id的执行结果：-1: 未执行；0: 已执行
       public CmdStatus GetCmdExecStatus(void cmdId,CancellationToken cancellationToken=default)
       {
-          return nt.GetCmdExecStatus(cmdId,cancellationToken:cancellationToken);
+          return await nt.GetCmdExecStatus(cmdId,cancellationToken:cancellationToken);
       }*/
 
       /// <summary>
       ///    开始微调: 如果当前有其他微调再传入新的微调命令会终止当前的微调进行新的微调
       /// </summary>
       /// <param name="fineTuning"></param>
-      public virtual async ValueTask StartFineTuning(FineTuning fineTuning,
+      public virtual async Task StartFineTuning(FineTuning fineTuning,
          CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.StartFineTuningAsync(fineTuning, cancellationToken: cancellationToken);
@@ -905,7 +909,7 @@ namespace Lebai.SDK
       /// <summary>
       ///    停止微调
       /// </summary>
-      public virtual async ValueTask StopFineTuning(CancellationToken cancellationToken = default)
+      public virtual async Task StopFineTuning(CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.StopFineTuningAsync(new Empty(), cancellationToken: cancellationToken);
       }
@@ -913,7 +917,7 @@ namespace Lebai.SDK
       /// <summary>
       ///    暂停机器人
       /// </summary>
-      public virtual async ValueTask Pause(CancellationToken cancellationToken = default)
+      public virtual async Task Pause(CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.PauseAsync(new Empty(), cancellationToken: cancellationToken);
       }
@@ -921,7 +925,7 @@ namespace Lebai.SDK
       /// <summary>
       ///    恢复机器人
       /// </summary>
-      public virtual async ValueTask Resume(CancellationToken cancellationToken = default)
+      public virtual async Task Resume(CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.ResumeAsync(new Empty(), cancellationToken: cancellationToken);
       }
@@ -932,10 +936,10 @@ namespace Lebai.SDK
       /// <param name="joint"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Vector> KinematicsForward(Joint joint,
+      public virtual async Task<Vector> KinematicsForward(Joint joint,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.KinematicsForwardAsync(joint, cancellationToken: cancellationToken);
+         return await RobotControllerClient.KinematicsForwardAsync(joint, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -944,10 +948,10 @@ namespace Lebai.SDK
       /// <param name="vector"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Joint> KinematicsInverse(Vector vector,
+      public virtual async Task<Joint> KinematicsInverse(Vector vector,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.KinematicsInverseAsync(vector, cancellationToken: cancellationToken);
+         return await RobotControllerClient.KinematicsInverseAsync(vector, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -956,10 +960,10 @@ namespace Lebai.SDK
       /// <param name="calcTcpParam"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Vector> CalcTcpTranslation(CalcTcpParam calcTcpParam,
+      public virtual async Task<Vector> CalcTcpTranslation(CalcTcpParam calcTcpParam,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.CalcTcpTranslationAsync(calcTcpParam, cancellationToken: cancellationToken);
+         return await RobotControllerClient.CalcTcpTranslationAsync(calcTcpParam, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -967,7 +971,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="moveLRPYRequest"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask MoveLRPY(MoveLRPYRequest moveLRPYRequest,
+      public virtual async Task MoveLRPY(MoveLRPYRequest moveLRPYRequest,
          CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.MoveLRPYAsync(moveLRPYRequest, cancellationToken: cancellationToken);
@@ -978,7 +982,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="lEDStatus"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetLED(LEDStatus lEDStatus, CancellationToken cancellationToken = default)
+      public virtual async Task SetLED(LEDStatus lEDStatus, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetLEDAsync(lEDStatus, cancellationToken: cancellationToken);
       }
@@ -987,7 +991,7 @@ namespace Lebai.SDK
       ///    设置声音
       /// </summary>
       /// <param name="voiceStatus"></param>
-      public virtual async ValueTask SetVoice(VoiceStatus voiceStatus, CancellationToken cancellationToken = default)
+      public virtual async Task SetVoice(VoiceStatus voiceStatus, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetVoiceAsync(voiceStatus, cancellationToken: cancellationToken);
       }
@@ -997,7 +1001,7 @@ namespace Lebai.SDK
       /// </summary>
       /// <param name="fanStatus"></param>
       /// <param name="cancellationToken"></param>
-      public virtual async ValueTask SetFan(FanStatus fanStatus, CancellationToken cancellationToken = default)
+      public virtual async Task SetFan(FanStatus fanStatus, CancellationToken cancellationToken = default)
       {
          await RobotControllerClient.SetFanAsync(fanStatus, cancellationToken: cancellationToken);
       }
@@ -1006,18 +1010,18 @@ namespace Lebai.SDK
       ///    获取灯板状态
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<LampStatus> GetLampStatus(CancellationToken cancellationToken = default)
+      public virtual async Task<LampStatus> GetLampStatus(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetLampStatusAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetLampStatusAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    Lua 状态查询
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<LuaStatus> GetLuaState(CancellationToken cancellationToken = default)
+      public virtual async Task<LuaStatus> GetLuaState(CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetLuaStateAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetLuaStateAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1026,10 +1030,10 @@ namespace Lebai.SDK
       /// <param name="externalDigital"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetExternalDO(ExternalDigital externalDigital,
+      public virtual async Task<Response> SetExternalDO(ExternalDigital externalDigital,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.SetExternalDOAsync(externalDigital, cancellationToken: cancellationToken);
+         return await RobotControllerClient.SetExternalDOAsync(externalDigital, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1038,10 +1042,10 @@ namespace Lebai.SDK
       /// <param name="externalPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExternalDigital> GetExternalDO(ExternalPin externalPin,
+      public virtual async Task<ExternalDigital> GetExternalDO(ExternalPin externalPin,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExternalDOAsync(externalPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExternalDOAsync(externalPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1050,10 +1054,10 @@ namespace Lebai.SDK
       /// <param name="externalPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExternalDigital> GetExternalDI(ExternalPin externalPin,
+      public virtual async Task<ExternalDigital> GetExternalDI(ExternalPin externalPin,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExternalDIAsync(externalPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExternalDIAsync(externalPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1062,10 +1066,10 @@ namespace Lebai.SDK
       /// <param name="externalAnalog"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetExternalAO(ExternalAnalog externalAnalog,
+      public virtual async Task<Response> SetExternalAO(ExternalAnalog externalAnalog,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.SetExternalAOAsync(externalAnalog, cancellationToken: cancellationToken);
+         return await RobotControllerClient.SetExternalAOAsync(externalAnalog, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1074,10 +1078,10 @@ namespace Lebai.SDK
       /// <param name="externalPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExternalAnalog> GetExternalAO(ExternalPin externalPin,
+      public virtual async Task<ExternalAnalog> GetExternalAO(ExternalPin externalPin,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExternalAOAsync(externalPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExternalAOAsync(externalPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1086,10 +1090,10 @@ namespace Lebai.SDK
       /// <param name="externalPin"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExternalAnalog> GetExternalAI(ExternalPin externalPin,
+      public virtual async Task<ExternalAnalog> GetExternalAI(ExternalPin externalPin,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExternalAIAsync(externalPin, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExternalAIAsync(externalPin, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1098,10 +1102,10 @@ namespace Lebai.SDK
       /// <param name="externalDevice"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExternalIOs> GetExternalIOs(ExternalDevice externalDevice,
+      public virtual async Task<ExternalIOs> GetExternalIOs(ExternalDevice externalDevice,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExternalIOsAsync(externalDevice, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExternalIOsAsync(externalDevice, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1110,10 +1114,10 @@ namespace Lebai.SDK
       /// <param name="externalDigitals"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetExternalDOs(ExternalDigitals externalDigitals,
+      public virtual async Task<Response> SetExternalDOs(ExternalDigitals externalDigitals,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.SetExternalDOsAsync(externalDigitals, cancellationToken: cancellationToken);
+         return await RobotControllerClient.SetExternalDOsAsync(externalDigitals, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1122,10 +1126,10 @@ namespace Lebai.SDK
       /// <param name="externalPins"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExternalDigitals> GetExternalDOs(ExternalPins externalPins,
+      public virtual async Task<ExternalDigitals> GetExternalDOs(ExternalPins externalPins,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExternalDOsAsync(externalPins, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExternalDOsAsync(externalPins, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1134,10 +1138,10 @@ namespace Lebai.SDK
       /// <param name="externalPins"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExternalDigitals> GetExternalDIs(ExternalPins externalPins,
+      public virtual async Task<ExternalDigitals> GetExternalDIs(ExternalPins externalPins,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExternalDIsAsync(externalPins, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExternalDIsAsync(externalPins, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1146,10 +1150,10 @@ namespace Lebai.SDK
       /// <param name="externalAnalogs"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetExternalAOs(ExternalAnalogs externalAnalogs,
+      public virtual async Task<Response> SetExternalAOs(ExternalAnalogs externalAnalogs,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.SetExternalAOsAsync(externalAnalogs, cancellationToken: cancellationToken);
+         return await RobotControllerClient.SetExternalAOsAsync(externalAnalogs, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1158,10 +1162,10 @@ namespace Lebai.SDK
       /// <param name="externalPins"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExternalAnalogs> GetExternalAOs(ExternalPins externalPins,
+      public virtual async Task<ExternalAnalogs> GetExternalAOs(ExternalPins externalPins,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExternalAOsAsync(externalPins, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExternalAOsAsync(externalPins, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1170,10 +1174,10 @@ namespace Lebai.SDK
       /// <param name="externalPins"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExternalAnalogs> GetExternalAIs(ExternalPins externalPins,
+      public virtual async Task<ExternalAnalogs> GetExternalAIs(ExternalPins externalPins,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetExternalAIsAsync(externalPins, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetExternalAIsAsync(externalPins, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1182,10 +1186,10 @@ namespace Lebai.SDK
       /// <param name="signalValue"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<SignalResult> SetSignal(SignalValue signalValue,
+      public virtual async Task<SignalResult> SetSignal(SignalValue signalValue,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.SetSignalAsync(signalValue, cancellationToken: cancellationToken);
+         return await RobotControllerClient.SetSignalAsync(signalValue, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1194,10 +1198,10 @@ namespace Lebai.SDK
       /// <param name="signalValue"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<SignalResult> GetSignal(SignalValue signalValue,
+      public virtual async Task<SignalResult> GetSignal(SignalValue signalValue,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.GetSignalAsync(signalValue, cancellationToken: cancellationToken);
+         return await RobotControllerClient.GetSignalAsync(signalValue, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1206,16 +1210,16 @@ namespace Lebai.SDK
       /// <param name="signalValue"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<SignalResult> AddSignal(SignalValue signalValue,
+      public virtual async Task<SignalResult> AddSignal(SignalValue signalValue,
          CancellationToken cancellationToken = default)
       {
-         return RobotControllerClient.AddSignalAsync(signalValue, cancellationToken: cancellationToken);
+         return await RobotControllerClient.AddSignalAsync(signalValue, cancellationToken: cancellationToken);
       }
       /*
 
       public stream RegisterSignals(stream stream SignalList,CancellationToken cancellationToken=default)
       {
-          return RobotControllerClient.RegisterSignals().RequestStream.WriteAsync(cancellationToken:cancellationToken);
+          return await RobotControllerClient.RegisterSignals().RequestStream.WriteAsync(cancellationToken:cancellationToken);
       }*/
 
       /// <summary>
@@ -1232,9 +1236,9 @@ namespace Lebai.SDK
       ///    获取机器人基础信息
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<RobotInfo> GetRobotInfo(CancellationToken cancellationToken = default)
+      public virtual async Task<RobotInfo> GetRobotInfo(CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.GetRobotInfoAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.GetRobotInfoAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1243,10 +1247,10 @@ namespace Lebai.SDK
       /// <param name="installDirection"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetInstallDirection(InstallDirection installDirection,
+      public virtual async Task<Response> SetInstallDirection(InstallDirection installDirection,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetInstallDirectionAsync(installDirection,
+         return await RobotPrivateControllerClient.SetInstallDirectionAsync(installDirection,
             cancellationToken: cancellationToken);
       }
 
@@ -1256,10 +1260,10 @@ namespace Lebai.SDK
       /// <param name="collisionDetector"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetCollisionDetector(CollisionDetector collisionDetector,
+      public virtual async Task<Response> SetCollisionDetector(CollisionDetector collisionDetector,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetCollisionDetectorAsync(collisionDetector,
+         return await RobotPrivateControllerClient.SetCollisionDetectorAsync(collisionDetector,
             cancellationToken: cancellationToken);
       }
 
@@ -1269,10 +1273,11 @@ namespace Lebai.SDK
       /// <param name="jointConfigs"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetJointConfig(JointConfigs jointConfigs,
+      public virtual async Task<Response> SetJointConfig(JointConfigs jointConfigs,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetJointConfigAsync(jointConfigs, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.SetJointConfigAsync(jointConfigs,
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1281,10 +1286,10 @@ namespace Lebai.SDK
       /// <param name="cartesianConfig"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetCartesianConfig(CartesianConfig cartesianConfig,
+      public virtual async Task<Response> SetCartesianConfig(CartesianConfig cartesianConfig,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetCartesianConfigAsync(cartesianConfig,
+         return await RobotPrivateControllerClient.SetCartesianConfigAsync(cartesianConfig,
             cancellationToken: cancellationToken);
       }
 
@@ -1294,10 +1299,10 @@ namespace Lebai.SDK
       /// <param name="trueOrFalse"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> EnableDDS(TrueOrFalse trueOrFalse,
+      public virtual async Task<Response> EnableDDS(TrueOrFalse trueOrFalse,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.EnableDDSAsync(trueOrFalse, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.EnableDDSAsync(trueOrFalse, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1306,10 +1311,10 @@ namespace Lebai.SDK
       /// <param name="collisionTorqueDiff"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetCollisionTorqueDiff(CollisionTorqueDiff collisionTorqueDiff,
+      public virtual async Task<Response> SetCollisionTorqueDiff(CollisionTorqueDiff collisionTorqueDiff,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetCollisionTorqueDiffAsync(collisionTorqueDiff,
+         return await RobotPrivateControllerClient.SetCollisionTorqueDiffAsync(collisionTorqueDiff,
             cancellationToken: cancellationToken);
       }
 
@@ -1317,9 +1322,10 @@ namespace Lebai.SDK
       /*public virtual async stream Notification RegisterNotification(google.protobuf.Empty){
       await RobotPrivateControllerClient.RegisterNotification(new Empty(),cancellationToken:cancellationToken);
       }*/
-      public virtual AsyncUnaryCall<DriverInfo> RobotDriverInfo(CancellationToken cancellationToken = default)
+      public virtual async Task<DriverInfo> RobotDriverInfo(CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.RobotDriverInfoAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.RobotDriverInfoAsync(new Empty(),
+            cancellationToken: cancellationToken);
       }
 
       /*// 机器人OTA单个设备更新接口
@@ -1333,10 +1339,11 @@ namespace Lebai.SDK
       /// <param name="otaCmd"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SwitchOtaPartition(OTACmd otaCmd,
+      public virtual async Task<Response> SwitchOtaPartition(OTACmd otaCmd,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SwitchOtaPartitionAsync(otaCmd, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.SwitchOtaPartitionAsync(otaCmd,
+            cancellationToken: cancellationToken);
       }
 
       /*// 机器人OTA批量更新接口
@@ -1348,9 +1355,9 @@ namespace Lebai.SDK
       ///    重置
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> Reset(CancellationToken cancellationToken = default)
+      public virtual async Task<Response> Reset(CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ResetAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.ResetAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1359,27 +1366,27 @@ namespace Lebai.SDK
       /// <param name="zero"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> InitZero(Zero zero, CancellationToken cancellationToken = default)
+      public virtual async Task<Response> InitZero(Zero zero, CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.InitZeroAsync(zero, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.InitZeroAsync(zero, cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    以零位置零
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetZero(CancellationToken cancellationToken = default)
+      public virtual async Task<Response> SetZero(CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetZeroAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.SetZeroAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获取机器人电压V
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<CurrentVoltage> GetVoltage(CancellationToken cancellationToken = default)
+      public virtual async Task<CurrentVoltage> GetVoltage(CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.GetVoltageAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.GetVoltageAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1388,19 +1395,21 @@ namespace Lebai.SDK
       /// <param name="jointServoParam"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<JointServoParams> SetServoParam(JointServoParam jointServoParam,
+      public virtual async Task<JointServoParams> SetServoParam(JointServoParam jointServoParam,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetServoParamAsync(jointServoParam, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.SetServoParamAsync(jointServoParam,
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获取当前所有关节伺服参数
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<JointServoParams> GetServoParams(CancellationToken cancellationToken = default)
+      public virtual async Task<JointServoParams> GetServoParams(CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.GetServoParamsAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.GetServoParamsAsync(new Empty(),
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1409,10 +1418,11 @@ namespace Lebai.SDK
       /// <param name="debugParams"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<DebugParams> SetDebugParams(DebugParams debugParams,
+      public virtual async Task<DebugParams> SetDebugParams(DebugParams debugParams,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetDebugParamsAsync(debugParams, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.SetDebugParamsAsync(debugParams,
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1421,10 +1431,10 @@ namespace Lebai.SDK
       /// <param name="fixDhRequest"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<FixDHResult> FixDHParams(FixDHRequest fixDhRequest,
+      public virtual async Task<FixDHResult> FixDHParams(FixDHRequest fixDhRequest,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.FixDHParamsAsync(fixDhRequest, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.FixDHParamsAsync(fixDhRequest, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1433,19 +1443,19 @@ namespace Lebai.SDK
       /// <param name="ledStyle"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<LEDStyles> SetLEDStyle(LEDStyle ledStyle,
+      public virtual async Task<LEDStyles> SetLEDStyle(LEDStyle ledStyle,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetLEDStyleAsync(ledStyle, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.SetLEDStyleAsync(ledStyle, cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获取LED样式
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<LEDStyles> GetLEDStyles(CancellationToken cancellationToken = default)
+      public virtual async Task<LEDStyles> GetLEDStyles(CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.GetLEDStylesAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.GetLEDStylesAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /*// 注册命令状态事件
@@ -1459,19 +1469,20 @@ namespace Lebai.SDK
       /// <param name="confirmInput"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> ConfirmCallback(ConfirmInput confirmInput,
+      public virtual async Task<Response> ConfirmCallback(ConfirmInput confirmInput,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ConfirmCallbackAsync(confirmInput, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.ConfirmCallbackAsync(confirmInput,
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    获取 Lua 上次执行到的机器人位置
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<PoseRes> GetLastPose(CancellationToken cancellationToken = default)
+      public virtual async Task<PoseRes> GetLastPose(CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.GetLastPoseAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.GetLastPoseAsync(new Empty(), cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1480,10 +1491,10 @@ namespace Lebai.SDK
       /// <param name="modbusExternalIOs"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetModbusExternalIO(ModbusExternalIOs modbusExternalIOs,
+      public virtual async Task<Response> SetModbusExternalIO(ModbusExternalIOs modbusExternalIOs,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetModbusExternalIOAsync(modbusExternalIOs,
+         return await RobotPrivateControllerClient.SetModbusExternalIOAsync(modbusExternalIOs,
             cancellationToken: cancellationToken);
       }
 
@@ -1493,10 +1504,11 @@ namespace Lebai.SDK
       /// <param name="buttonConfig"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetButtonConfig(ButtonConfig buttonConfig,
+      public virtual async Task<Response> SetButtonConfig(ButtonConfig buttonConfig,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetButtonConfigAsync(buttonConfig, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.SetButtonConfigAsync(buttonConfig,
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1505,10 +1517,10 @@ namespace Lebai.SDK
       /// <param name="trueOrFalse"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SetBreakACup(TrueOrFalse trueOrFalse,
+      public virtual async Task<Response> SetBreakACup(TrueOrFalse trueOrFalse,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetBreakACupAsync(trueOrFalse, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.SetBreakACupAsync(trueOrFalse, cancellationToken: cancellationToken);
       }
 
       /*// PVAT数据记录接口，用户记录pvat数据
@@ -1520,9 +1532,10 @@ namespace Lebai.SDK
       ///    停止记录pvat数据
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> StopRecordPVAT(CancellationToken cancellationToken = default)
+      public virtual async Task<Response> StopRecordPVAT(CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.StopRecordPVATAsync(new Empty(), cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.StopRecordPVATAsync(new Empty(),
+            cancellationToken: cancellationToken);
       }
 
       /*// 语音升级
@@ -1536,10 +1549,10 @@ namespace Lebai.SDK
       /// <param name="dhRequest"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<DHParams> GetDHParams(DHRequest dhRequest,
+      public virtual async Task<DHParams> GetDHParams(DHRequest dhRequest,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.GetDHParamsAsync(dhRequest, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.GetDHParamsAsync(dhRequest, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1548,10 +1561,10 @@ namespace Lebai.SDK
       /// <param name="dhParams"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<DHParams> SetDHParams(DHParams dhParams,
+      public virtual async Task<DHParams> SetDHParams(DHParams dhParams,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SetDHParamsAsync(dhParams, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.SetDHParamsAsync(dhParams, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1560,10 +1573,11 @@ namespace Lebai.SDK
       /// <param name="param"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExtraServoParam> WriteExtraServoParam(ExtraServoParam param,
+      public virtual async Task<ExtraServoParam> WriteExtraServoParam(ExtraServoParam param,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.WriteExtraServoParamAsync(param, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.WriteExtraServoParamAsync(param,
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1572,10 +1586,11 @@ namespace Lebai.SDK
       /// <param name="param"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExtraServoParam> ReadExtraServoParam(ExtraServoParam param,
+      public virtual async Task<ExtraServoParam> ReadExtraServoParam(ExtraServoParam param,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ReadExtraServoParamAsync(param, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.ReadExtraServoParamAsync(param,
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1584,20 +1599,21 @@ namespace Lebai.SDK
       /// <param name="param"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExtraServoParams> WriteExtraServoParams(ExtraServoParam param,
+      public virtual async Task<ExtraServoParams> WriteExtraServoParams(ExtraServoParam param,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.WriteExtraServoParamsAsync(param, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.WriteExtraServoParamsAsync(param,
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    读取多个伺服控制参数
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExtraServoParams> ReadExtraServoParams(
+      public virtual async Task<ExtraServoParams> ReadExtraServoParams(
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ReadExtraServoParamsAsync(new Empty(),
+         return await RobotPrivateControllerClient.ReadExtraServoParamsAsync(new Empty(),
             cancellationToken: cancellationToken);
       }
 
@@ -1605,10 +1621,10 @@ namespace Lebai.SDK
       ///    重置伺服控制参数
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<ExtraServoParams> ResetExtraServoParams(
+      public virtual async Task<ExtraServoParams> ResetExtraServoParams(
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ResetExtraServoParamsAsync(new Empty(),
+         return await RobotPrivateControllerClient.ResetExtraServoParamsAsync(new Empty(),
             cancellationToken: cancellationToken);
       }
 
@@ -1618,10 +1634,10 @@ namespace Lebai.SDK
       /// <param name="param"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<JointBacklash> WriteJointBacklash(JointBacklash param,
+      public virtual async Task<JointBacklash> WriteJointBacklash(JointBacklash param,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.WriteJointBacklashAsync(param, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.WriteJointBacklashAsync(param, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1630,10 +1646,10 @@ namespace Lebai.SDK
       /// <param name="param"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<JointBacklash> ReadJointBacklash(JointBacklash param,
+      public virtual async Task<JointBacklash> ReadJointBacklash(JointBacklash param,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ReadJointBacklashAsync(param, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.ReadJointBacklashAsync(param, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1642,19 +1658,20 @@ namespace Lebai.SDK
       /// <param name="param"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<JointBacklashes> WriteJointBacklashes(JointBacklash param,
+      public virtual async Task<JointBacklashes> WriteJointBacklashes(JointBacklash param,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.WriteJointBacklashesAsync(param, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.WriteJointBacklashesAsync(param,
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    读取多个“主动消回差”参数
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<JointBacklashes> ReadJointBacklashes(CancellationToken cancellationToken = default)
+      public virtual async Task<JointBacklashes> ReadJointBacklashes(CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ReadJointBacklashesAsync(new Empty(),
+         return await RobotPrivateControllerClient.ReadJointBacklashesAsync(new Empty(),
             cancellationToken: cancellationToken);
       }
 
@@ -1662,9 +1679,9 @@ namespace Lebai.SDK
       ///    重置“主动消回差”参数
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<JointBacklashes> ResetJointBacklashes(CancellationToken cancellationToken = default)
+      public virtual async Task<JointBacklashes> ResetJointBacklashes(CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ResetJointBacklashesAsync(new Empty(),
+         return await RobotPrivateControllerClient.ResetJointBacklashesAsync(new Empty(),
             cancellationToken: cancellationToken);
       }
 
@@ -1674,10 +1691,10 @@ namespace Lebai.SDK
       /// <param name="param"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<EnableJointBacklashes> WriteEnableJointBacklashes(EnableJointBacklash param,
+      public virtual async Task<EnableJointBacklashes> WriteEnableJointBacklashes(EnableJointBacklash param,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.WriteEnableJointBacklashesAsync(param,
+         return await RobotPrivateControllerClient.WriteEnableJointBacklashesAsync(param,
             cancellationToken: cancellationToken);
       }
 
@@ -1685,10 +1702,10 @@ namespace Lebai.SDK
       ///    是否启用主动消回差
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<EnableJointBacklashes> ReadEnableJointBacklashes(
+      public virtual async Task<EnableJointBacklashes> ReadEnableJointBacklashes(
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ReadEnableJointBacklashesAsync(new Empty(),
+         return await RobotPrivateControllerClient.ReadEnableJointBacklashesAsync(new Empty(),
             cancellationToken: cancellationToken);
       }
 
@@ -1696,10 +1713,10 @@ namespace Lebai.SDK
       ///    重置主动消回差
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<EnableJointBacklashes> ResetEnableJointBacklashes(
+      public virtual async Task<EnableJointBacklashes> ResetEnableJointBacklashes(
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ResetEnableJointBacklashesAsync(new Empty(),
+         return await RobotPrivateControllerClient.ResetEnableJointBacklashesAsync(new Empty(),
             cancellationToken: cancellationToken);
       }
 
@@ -1709,10 +1726,11 @@ namespace Lebai.SDK
       /// <param name="param"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<JointBacklashParam> WriteJointBacklashParam(JointBacklashParam param,
+      public virtual async Task<JointBacklashParam> WriteJointBacklashParam(JointBacklashParam param,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.WriteJointBacklashParamAsync(param, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.WriteJointBacklashParamAsync(param,
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1721,10 +1739,11 @@ namespace Lebai.SDK
       /// <param name="param"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<JointBacklashParam> ReadJointBacklashParam(JointBacklashParam param,
+      public virtual async Task<JointBacklashParam> ReadJointBacklashParam(JointBacklashParam param,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ReadJointBacklashParamAsync(param, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.ReadJointBacklashParamAsync(param,
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1733,20 +1752,21 @@ namespace Lebai.SDK
       /// <param name="param"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<JointBacklashParams> WriteJointBacklashParams(JointBacklashParam param,
+      public virtual async Task<JointBacklashParams> WriteJointBacklashParams(JointBacklashParam param,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.WriteJointBacklashParamsAsync(param, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.WriteJointBacklashParamsAsync(param,
+            cancellationToken: cancellationToken);
       }
 
       /// <summary>
       ///    读多个关节回差参数
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<JointBacklashParams> ReadJointBacklashParams(
+      public virtual async Task<JointBacklashParams> ReadJointBacklashParams(
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ReadJointBacklashParamsAsync(new Empty(),
+         return await RobotPrivateControllerClient.ReadJointBacklashParamsAsync(new Empty(),
             cancellationToken: cancellationToken);
       }
 
@@ -1754,10 +1774,10 @@ namespace Lebai.SDK
       ///    重置关节回差参数
       /// </summary>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<JointBacklashParams> ResetJointBacklashParams(
+      public virtual async Task<JointBacklashParams> ResetJointBacklashParams(
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.ResetJointBacklashParamsAsync(new Empty(),
+         return await RobotPrivateControllerClient.ResetJointBacklashParamsAsync(new Empty(),
             cancellationToken: cancellationToken);
       }
 
@@ -1767,10 +1787,10 @@ namespace Lebai.SDK
       /// <param name="param"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> EnableJointLimit(TrueOrFalse param,
+      public virtual async Task<Response> EnableJointLimit(TrueOrFalse param,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.EnableJointLimitAsync(param, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.EnableJointLimitAsync(param, cancellationToken: cancellationToken);
       }
 
       /// <summary>
@@ -1779,10 +1799,10 @@ namespace Lebai.SDK
       /// <param name="param"></param>
       /// <param name="cancellationToken"></param>
       /// <returns></returns>
-      public virtual AsyncUnaryCall<Response> SwitchSimulate(TrueOrFalse param,
+      public virtual async Task<Response> SwitchSimulate(TrueOrFalse param,
          CancellationToken cancellationToken = default)
       {
-         return RobotPrivateControllerClient.SwitchSimulateAsync(param, cancellationToken: cancellationToken);
+         return await RobotPrivateControllerClient.SwitchSimulateAsync(param, cancellationToken: cancellationToken);
       }
 
 #if NET5_0||NET6_0
@@ -1817,8 +1837,8 @@ namespace Lebai.SDK
       }
 #endif
       /*// 连接/断开 MODBUS 设备
-      public virtual AsyncUnaryCall<Response> ConnectExternalIO(ExternalIOState param){
-      return RobotPrivateControllerClient.ConnectExternalIOAsync(param,cancellationToken:cancellationToken);
+      public virtual async Task<Response> ConnectExternalIO(ExternalIOState param){
+      return await RobotPrivateControllerClient.ConnectExternalIOAsync(param,cancellationToken:cancellationToken);
       }*/
    }
 }
