@@ -100,7 +100,7 @@ namespace Lebai.SDK
         }
 
         /// <summary>
-        /// 同步，等待指定命令执行完成，type为0时表示所有（默认）
+        /// 同步，等待命令执行完成
         /// </summary>
         public virtual async ValueTask Sync()
         {

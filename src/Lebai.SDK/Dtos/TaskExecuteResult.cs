@@ -3,5 +3,10 @@
 	public class TaskExecuteResult
 	{
 		public int Id { get; set; }
+
+		public void Deconstruct(out int id)
+		{
+			id = Id;
+		}
 	}
 }

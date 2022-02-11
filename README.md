@@ -13,29 +13,27 @@ Api 文档：https://www.fuget.org/packages/Lebai.SDK/latest/lib/net5.0/Lebai.SD
 ## 示例
 
 ```C#
-using System.Threading.Tasks;
 using Robotc;
-using Lebai.SDK;
 
-namespace Lebai.SDK
+namespace Lebai.SDK.Sample
 {
-	public class Sample
-	{
-		public static async Task Main(string[] args)
-		{
-			var client = new LebaiRobotClient("192.168.3.227");			
-			// 启动
-			await client.StartSys();
-			// 获取机器人数据
-			var robotData = await client.GetRobotData();
-			// 获取IO数据
-			await client.GetDIO(new IOPin
-			{
-				Pin = 1
-			});
-			// 运行场景直到做完
-			var taskResult2 = await client.RunSceneUntilDone(10001);
-		}
-	}
+   public class Sample
+   {
+      public static async Task Main(string[] args)
+      {
+         var client = new LebaiRobotClient("192.168.3.227");			
+         // 启动
+         await client.StartSys();
+         // 获取机器人数据
+         var robotData = await client.GetRobotData();
+         // 获取IO数据
+         await client.GetDIO(new IOPin
+         {
+            Pin = 1
+         });
+         // 运行场景直到做完
+         var taskResult2 = await client.RunSceneUntilDone(10001);
+      }
+   }
 }
 ```
