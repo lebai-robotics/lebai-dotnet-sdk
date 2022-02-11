@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Version>0.3.5</Version>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+        <RepositoryUrl>https://github.com/lebai-robotics/lebai-dotnet-sdk</RepositoryUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Google.Protobuf" Version="3.19.1"/>
+        <PackageReference Include="Grpc.Net.Client" Version="2.40.0"/>
+        <PackageReference Include="Grpc.Tools" Version="2.42.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+
+        <Protobuf Include="messages.proto">
+            <GrpcServices>Client</GrpcServices>
+            <Access>Public</Access>
+            <ProtoCompile>True</ProtoCompile>
+            <CompileOutputs>True</CompileOutputs>
+            <Generator>MSBuild:Compile</Generator>
+        </Protobuf>
+        <Protobuf Include="Protos\os_server.proto">
+            <GrpcServices>Client</GrpcServices>
+            <Generator>MSBuild:Compile</Generator>
+        </Protobuf>
+        <Protobuf Include="Protos\private_controller.proto">
+            <GrpcServices>Client</GrpcServices>
+            <Generator>MSBuild:Compile</Generator>
+        </Protobuf>
+        <Protobuf Include="Protos\robot_controller.proto">
+            <GrpcServices>Client</GrpcServices>
+            <Generator>MSBuild:Compile</Generator>
+        </Protobuf>
+        <Protobuf Include="Protos\robot_test.proto">
+            <Generator>MSBuild:Compile</Generator>
+            <GrpcServices>Client</GrpcServices>
+        </Protobuf>
+        <Protobuf Include="Protos\simulation.proto">
+            <Generator>MSBuild:Compile</Generator>
+            <GrpcServices>Client</GrpcServices>
+        </Protobuf>
+    </ItemGroup>
+
+</Project>
