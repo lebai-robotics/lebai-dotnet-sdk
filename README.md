@@ -1,4 +1,4 @@
-﻿# Lebai Robot DotNet SDK
+﻿# Lebai Robot .Net SDK
 
 [![NuGet](https://img.shields.io/nuget/v/Lebai.SDK.svg)](https://www.nuget.org/packages/Lebai.SDK/)
 
