@@ -71,12 +71,12 @@ namespace Lebai.SDK.Dtos
 		/// <summary>
 		/// 执行次数
 		/// </summary>
-		public int ExecuteCount { get; set; }
+		public int? ExecuteCount { get; set; }
 
 		/// <summary>
 		/// 执行的次数
 		/// </summary>
-		public int ExecutedCount { get; set; }
+		public int? ExecutedCount { get; set; }
 
 		/// <summary>
 		/// 名称
@@ -86,7 +86,7 @@ namespace Lebai.SDK.Dtos
 		/// <summary>
 		/// 状态
 		/// </summary>
-		public TaskStatus Status { get; set; }
+		public TaskStatus? Status { get; set; }
 
 		/// <summary>
 		/// 注释
@@ -103,9 +103,9 @@ namespace Lebai.SDK.Dtos
 		/// </summary>
 		public string EndTime { get; set; }
 		
-		public long ConsumeTime { get; set; }
+		public long? ConsumeTime { get; set; }
 
-		public int Mode { get; set; }
+		public int? Mode { get; set; }
 
 
 		/// <summary>

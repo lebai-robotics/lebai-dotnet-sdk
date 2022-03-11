@@ -121,7 +121,7 @@ namespace Lebai.SDK
       public virtual async ValueTask<bool> GetIsCanRunTask(CancellationToken cancellationToken = default)
       {
          var result = await GetTasks(new GetTasksInput {PageIndex = 1, PageSize = 1}, cancellationToken);
-         var first = result.Items.FirstOrDefault();
+         var first = result?.Items?.FirstOrDefault();
          return first == null || first.Status != TaskStatus.Running && first.Status != TaskStatus.Pause;
       }
 
@@ -132,7 +132,11 @@ namespace Lebai.SDK
       /// <exception cref="Exception"></exception>
       protected virtual async ValueTask CheckRobotStatus(CancellationToken cancellationToken = default)
       {
-         if (!await GetIsCanRunTask(cancellationToken)) throw new Exception("机器人正在执行其他任务!");
+         var result = await GetTasks(new GetTasksInput {PageIndex = 1, PageSize = 1}, cancellationToken);
+         var first = result?.Items?.FirstOrDefault();
+         var r=  first == null || first.Status != TaskStatus.Running && first.Status != TaskStatus.Pause;
+         
+         if (!r) throw new Exception($"机器人正在执行其他任务!，任务数量：{result?.Items} 真正运行的其他任务: {first.Status}");
       }
 
       /// <summary>
@@ -193,7 +197,7 @@ namespace Lebai.SDK
       /// <exception cref="HttpRequestException"></exception>
       protected void HandleResult<T>(LebaiHttpResult<T> result, string message = "")
       {
-         if (result.Code != 0)
+         if (result?.Code != 0)
             throw new HttpRequestException($"调用失败，{message}，Code：{result.Code}" +
                                            (CodeMessage.ContainsKey(result.Code)
                                               ? $"，{CodeMessage[result.Code]}"
@@ -211,23 +215,23 @@ namespace Lebai.SDK
       public virtual async ValueTask<TaskInfo> WaitTaskRunCompleted(int id,
          CancellationToken cancellationToken = default)
       {
-         var taskInfo = await GetTask(id, cancellationToken);
+         TaskInfo taskInfo =  await GetTask(id, cancellationToken);
          while (true)
          {
             if (cancellationToken.IsCancellationRequested) throw new OperationCanceledException();
 
-            if (taskInfo.Status is TaskStatus.Running or TaskStatus.Idea)
+            if (taskInfo?.Status is TaskStatus.Running or TaskStatus.Idea)
             {
                await Task.Delay(100, cancellationToken);
                taskInfo = await GetTask(id, cancellationToken);
             }
-            else if (taskInfo.Status is TaskStatus.RunSuccess)
+            else if (taskInfo?.Status is TaskStatus.RunSuccess)
             {
                break;
             }
             else
             {
-               throw new RobotTaskException(taskInfo.Status);
+               throw new RobotTaskException(taskInfo?.Status);
             }
          }
 

@@ -4,9 +4,9 @@ namespace Lebai.SDK.Exceptions
 {
 	public class RobotTaskException : RobotException
 	{
-		public TaskStatus TaskStatus { get; }
+		public TaskStatus? TaskStatus { get; }
 
-		public RobotTaskException(TaskStatus taskStatus) : base(EnumExtension.GetEnumDescription(taskStatus))
+		public RobotTaskException(TaskStatus? taskStatus) : base(EnumExtension.GetEnumDescription(taskStatus))
 		{
 			TaskStatus = taskStatus;
 		}

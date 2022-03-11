@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Version>0.3.8</Version>
+        <Version>0.3.13</Version>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
         <RepositoryUrl>https://github.com/lebai-robotics/lebai-dotnet-sdk</RepositoryUrl>
